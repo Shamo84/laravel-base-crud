@@ -14,7 +14,7 @@ class GameController extends Controller
     public function index()
     {
         $games = Game::all();
-        dd($games);
+        return view("games.index", compact("games"));
     }
 
     /**
