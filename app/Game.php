@@ -13,4 +13,6 @@ class Game extends Model
       "console",
       "price"
     ];
+
+    protected $table = "games";
 }

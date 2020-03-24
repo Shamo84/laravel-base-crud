@@ -35,13 +35,21 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
+      $request->validate([
+        'title' => 'required|unique:games|max:255',
+        'genre' => 'required',
+        'developer' => 'required',
+        'console' => 'required',
+        'price' => 'required|numeric'
+      ]);
       $data = $request->all();
       $game = new Game;
-      $game->title = $data["title"];
-      $game->genre = $data["genre"];
-      $game->developer = $data["developer"];
-      $game->console = $data["console"];
-      $game->price = $data["price"];
+      // $game->title = $data["title"];
+      // $game->genre = $data["genre"];
+      // $game->developer = $data["developer"];
+      // $game->console = $data["console"];
+      // $game->price = $data["price"];
+      $game->fill($data);
       $saved = $game->save();
 
       if ($saved) {
@@ -55,9 +63,9 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Game $game)
     {
-        //
+      return view("games.show", compact("game"));
     }
 
     /**
@@ -66,9 +74,9 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Game $game)
     {
-        //
+      return view("games.edit", compact("game"));
     }
 
     /**
@@ -80,7 +88,19 @@ class GameController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'title' => 'required|unique:games|max:255',
+        'genre' => 'required',
+        'developer' => 'required',
+        'console' => 'required',
+        'price' => 'required|numeric'
+      ]);
+      $game = Game::find($id);
+      $data = $request->all();
+      $updated = $game->update($data);
+      if ($updated) {
+        return redirect()->route("games.index");
+      }
     }
 
     /**

@@ -1,7 +1,6 @@
 @extends("layouts.layout")
 
 @section("main")
-  @foreach ($games as $game)
   <div class="game">
     <ul>
       <li>Id: {{$game->id}}</li>
@@ -14,5 +13,4 @@
       <li>Aggiornato: {{$game->updated_at}}</li>
     </ul>
   </div>
-  @endforeach
 @endsection
