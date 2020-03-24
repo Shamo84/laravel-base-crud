@@ -86,16 +86,15 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Game $game)
     {
       $request->validate([
-        'title' => 'required|unique:games|max:255',
+        'title' => 'required|max:255',
         'genre' => 'required',
         'developer' => 'required',
         'console' => 'required',
         'price' => 'required|numeric'
       ]);
-      $game = Game::find($id);
       $data = $request->all();
       $updated = $game->update($data);
       if ($updated) {
@@ -109,8 +108,9 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Game $game)
     {
-        //
+      $game->delete();
+      return redirect()->route("games.index");
     }
 }

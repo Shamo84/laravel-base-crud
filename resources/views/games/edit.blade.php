@@ -16,14 +16,14 @@
       </ul>
     </div>
   @endif
-  <form action="{{route('games.update'), $game->id}}" method="post">
+  <form action="{{route('games.update', compact("game"))}}" method="post">
     @csrf
     @method("PATCH")
-    <input type="text" name="title" placeholder="Title" value="$game->title">
-    <input type="text" name="genre" placeholder="Genre" value="$game->genre">
-    <input type="text" name="developer" placeholder="Developer" value="$game->developer">
-    <input type="text" name="console" placeholder="Console" value="$game->console">
-    <input type="number" name="price" placeholder="Price" value="$game->price">
+    <input type="text" name="title" placeholder="Title" value="{{$game->title}}">
+    <input type="text" name="genre" placeholder="Genre" value="{{$game->genre}}">
+    <input type="text" name="developer" placeholder="Developer" value="{{$game->developer}}">
+    <input type="text" name="console" placeholder="Console" value="{{$game->console}}">
+    <input type="number" name="price" placeholder="Price" value="{{$game->price}}">
     <input type="submit" value="Send">
   </form>
 </body>

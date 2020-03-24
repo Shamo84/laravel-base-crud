@@ -12,6 +12,13 @@
       <li>Price: {{$game->price}}</li>
       <li>Creato: {{$game->created_at}}</li>
       <li>Aggiornato: {{$game->updated_at}}</li>
+      <li>
+        <form action="{{route('games.destroy', compact("game"))}}" method="post">
+          @csrf
+          @method("DELETE")
+          <input type="submit" value="DELETE">
+        </form>
+      </li>
     </ul>
   </div>
   @endforeach
